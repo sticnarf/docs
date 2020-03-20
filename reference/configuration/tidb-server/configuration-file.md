@@ -19,8 +19,26 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `mem-quota-query`
 
 - The maximum memory available for a single SQL statement.
-- Default value: `34359738368`
+- Default value: `1073741824`
 - Requests that require more memory than this value are handled based on the behavior defined by `oom-action`.
+- This value is the initial value of the system variable [`tidb_mem_quota_query`](/reference/configuration/tidb-server/tidb-specific-variables.md#tidb_mem_quota_query).
+
+### `oom-use-tmp-storage`
+
++ Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Default value:  `true`
+
+### `tmp-storage-path`
+
++ Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Default value: `<TMPDIR>/tidb/tmp-storage`
++ It only takes effect when `oom-use-tmp-storage` is `true`.
+
+### `oom-action`
+
+- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `mem-quota-query` and cannot be spilled over to disk.
+- Default value: `"cancel"`
+- The valid options are `"log"` and `"cancel"`. When `oom-action="log"`, it prints the log only. When `oom-action="cancel"`, it cancels the operation and outputs the log.
 
 ### `oom-use-tmp-storage`
 

@@ -80,4 +80,9 @@ CREATE TABLE person (
 The current limitations of JSON and generated columns are as follows:
 
 - You cannot add the generated column in the storage type of `STORED` through `ALTER TABLE`.
+<<<<<<< HEAD:reference/sql/generated-columns.md
+=======
+- You can neither convert a generated stored column to a normal column through the `ALTER TABLE` statement nor convert a normal column to a generated stored column.
+- You cannot modify the **expression** of a generated stored column through the `ALTER TABLE` statement.
+>>>>>>> upstream/master:dev/reference/sql/generated-columns.md
 - Not all [JSON functions](/reference/sql/functions-and-operators/json-functions.md) are supported.

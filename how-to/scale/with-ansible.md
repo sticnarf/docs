@@ -30,6 +30,7 @@ Assume that the topology is as follows:
 
 For example, if you want to add two TiDB nodes (node101, node102) with the IP addresses `172.16.10.101` and `172.16.10.102`, take the following steps:
 
+<<<<<<< HEAD
 1. Edit the `inventory.ini` file and append the node information:
 
     ```ini
@@ -91,6 +92,111 @@ For example, if you want to add two TiDB nodes (node101, node102) with the IP ad
     ```
     ansible-playbook bootstrap.yml -l 172.16.10.101,172.16.10.102
     ```
+=======
+1. Edit the `inventory.ini` file and the `hosts.ini` file, and append the node information.
+
+    - Edit the `inventory.ini` file:
+
+        ```ini
+        [tidb_servers]
+        172.16.10.4
+        172.16.10.5
+        172.16.10.101
+        172.16.10.102
+
+        [pd_servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
+
+        [tikv_servers]
+        172.16.10.6
+        172.16.10.7
+        172.16.10.8
+        172.16.10.9
+
+        [monitored_servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
+        172.16.10.4
+        172.16.10.5
+        172.16.10.6
+        172.16.10.7
+        172.16.10.8
+        172.16.10.9
+        172.16.10.101
+        172.16.10.102
+
+        [monitoring_servers]
+        172.16.10.3
+
+        [grafana_servers]
+        172.16.10.3
+        ```
+
+        Now the topology is as follows:
+
+        | Name | Host IP | Services |
+        | ---- | ------- | -------- |
+        | node1 | 172.16.10.1 | PD1 |
+        | node2 | 172.16.10.2 | PD2 |
+        | node3 | 172.16.10.3 | PD3, Monitor |
+        | node4 | 172.16.10.4 | TiDB1 |
+        | node5 | 172.16.10.5 | TiDB2 |
+        | **node101** | **172.16.10.101**|**TiDB3** |
+        | **node102** | **172.16.10.102**|**TiDB4** |
+        | node6 | 172.16.10.6 | TiKV1 |
+        | node7 | 172.16.10.7 | TiKV2 |
+        | node8 | 172.16.10.8 | TiKV3 |
+        | node9 | 172.16.10.9 | TiKV4 |
+
+    - Edit the `hosts.ini` file:
+
+        ```ini
+        [servers]
+        172.16.10.1
+        172.16.10.2
+        172.16.10.3
+        172.16.10.4
+        172.16.10.5
+        172.16.10.6
+        172.16.10.7
+        172.16.10.8
+        172.16.10.9
+        172.16.10.101
+        172.16.10.102
+        [all:vars]
+        username = tidb
+        ntp_server = pool.ntp.org
+        ```
+
+2. Initialize the newly added node.
+
+    1. Configure the SSH mutual trust and sudo rules of the deployment machine on the central control machine:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        ansible-playbook -i hosts.ini create_users.yml -l 172.16.10.101,172.16.10.102 -u root -k
+        ```
+
+    2. Install the NTP service on the deployment target machine:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        ansible-playbook -i hosts.ini deploy_ntp.yml -u tidb -b
+        ```
+
+    3. Initialize the node on the deployment target machine:
+
+        {{< copyable "shell-regular" >}}
+
+        ```bash
+        ansible-playbook bootstrap.yml -l 172.16.10.101,172.16.10.102
+        ```
+>>>>>>> upstream/master
 
     > **Note:**
     >
@@ -200,7 +306,12 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
         > You cannot add the `#` character at the beginning of the line. Otherwise, the following configuration cannot take effect.
 
     2. Add `--join="http://172.16.10.1:2379" \`. The IP address (`172.16.10.1`) can be any of the existing PD IP address in the cluster.
+<<<<<<< HEAD
     3. Manually start the PD service in the newly added PD node:
+=======
+
+    3. Start the PD service in the newly added PD node:
+>>>>>>> upstream/master
 
         ```
         {deploy_dir}/scripts/start_pd.sh
@@ -220,6 +331,7 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
         >
         > `pd-ctl` is a command used to check the number of PD nodes.
 
+<<<<<<< HEAD
 5. Apply a rolling update to the entire cluster:
 
     ```
@@ -236,10 +348,40 @@ For example, if you want to add a PD node (node103) with the IP address `172.16.
 
     ```
     ansible-playbook rolling_update_monitor.yml --tags=prometheus
+=======
+5. Start the monitoring service:
+
+    ```
+    ansible-playbook start.yml -l 172.16.10.103
+    ```
+
+    > **Note:**
+    >
+    > If you use an alias (inventory_name), use the `-l` option to specify the alias.
+
+6. Update the cluster configuration:
+
+    ```
+    ansible-playbook deploy.yml
+    ```
+
+7. Restart Prometheus, and enable the monitoring of PD nodes used for increasing the capacity:
+
+    ```
+    ansible-playbook stop.yml --tags=prometheus
+    ansible-playbook start.yml --tags=prometheus
+>>>>>>> upstream/master
     ```
 
 8. Monitor the status of the entire cluster and the newly added node by opening a browser to access the monitoring platform: `http://172.16.10.3:3000`.
 
+<<<<<<< HEAD
+=======
+> **Note:**
+>
+> The PD Client in TiKV caches the list of PD nodes. Currently, the list is updated only if the PD leader is switched or the TiKV server is restarted to load the latest configuration. To avoid TiKV caching an outdated list, there should be at least two existing PD members in the PD cluster after increasing or decreasing the capacity of a PD node. If this condition is not met, transfer the PD leader manually to update the list of PD nodes.
+
+>>>>>>> upstream/master
 ## Decrease the capacity of a TiDB node
 
 For example, if you want to remove a TiDB node (node5) with the IP address `172.16.10.5`, take the following steps:
@@ -430,6 +572,13 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     ansible-playbook stop.yml -l 172.16.10.2
     ```
 
+<<<<<<< HEAD
+=======
+    > **Note:**
+    >
+    > In this example, you can only stop the PD service on node2. If there are any other services deployed with the IP address `172.16.10.2`, use the `-t` option to specify the service (such as `-t tidb`).
+
+>>>>>>> upstream/master
 4. Edit the `inventory.ini` file and remove the node information:
 
     ```ini
@@ -480,6 +629,7 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     | node8 | 172.16.10.8 | TiKV3 |
     | node9 | 172.16.10.9 | TiKV4 |
 
+<<<<<<< HEAD
 5. Perform a rolling update to the entire TiDB cluster:
 
     ```
@@ -493,3 +643,23 @@ For example, if you want to remove a PD node (node2) with the IP address `172.16
     ```
 
 7. To monitor the status of the entire cluster, open a browser to access the monitoring platform: `http://172.16.10.3:3000`.
+=======
+5. Update the cluster configuration:
+
+    ```
+    ansible-playbook deploy.yml
+    ```
+
+6. Restart Prometheus, and disable the monitoring of PD nodes used for increasing the capacity:
+
+    ```
+    ansible-playbook stop.yml --tags=prometheus
+    ansible-playbook start.yml --tags=prometheus
+    ```
+
+7. To monitor the status of the entire cluster, open a browser to access the monitoring platform: `http://172.16.10.3:3000`.
+
+> **Note:**
+>
+> The PD Client in TiKV caches the list of PD nodes. Currently, the list is updated only if the PD leader is switched or the TiKV server is restarted to load the latest configuration. To avoid TiKV caching an outdated list, there should be at least two existing PD members in the PD cluster after increasing or decreasing the capacity of a PD node. If this condition is not met, transfer the PD leader manually to update the list of PD nodes.
+>>>>>>> upstream/master

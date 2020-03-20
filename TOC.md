@@ -75,16 +75,26 @@
     - [Overview](/how-to/monitor/overview.md)
     - [Monitor a TiDB Cluster](/how-to/monitor/monitor-a-cluster.md)
   + Migrate
+<<<<<<< HEAD
     - [Overview](/how-to/migrate/overview.md)
     + Migrate from MySQL
       - [Migrate the Full Data](/how-to/migrate/from-mysql.md)
       - [Migrate the Incremental Data](/how-to/migrate/incrementally-from-mysql.md)
     - [Migrate from Aurora](/how-to/migrate/from-aurora.md)
+=======
+    - [Migration Tools User Guide](/reference/tools/user-guide.md)
+    + Migrate from MySQL
+      - [Migration Case of Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
+>>>>>>> upstream/master
     - [Migrate from CSV](/reference/tools/tidb-lightning/csv.md)
   + Maintain
     - [Common Ansible Operations](/how-to/deploy/orchestrated/ansible-operations.md)
     + Backup and Restore
+<<<<<<< HEAD
       - [Use `mydumper` and `loader`](/how-to/maintain/backup-and-restore/mydumper-loader.md)
+=======
+      - [Use Mydumper and TiDB Lightning](/how-to/maintain/backup-and-restore/mydumper-lightning.md)
+>>>>>>> upstream/master
       - [Use BR](/reference/tools/br/br.md)
       - [BR Usage Scenarios](/reference/tools/br/use-cases.md)
     + Identify Abnormal Queries
@@ -308,12 +318,20 @@
     - [Upgrade](/reference/tidb-binlog/upgrade.md)
     - [Reparo](/reference/tidb-binlog/reparo.md)
     - [Binlog Slave Client](/reference/tidb-binlog/binlog-slave-client.md)
+<<<<<<< HEAD
+=======
+    - [TiDB Binlog Relay Log](/reference/tidb-binlog/relay-log.md)
+>>>>>>> upstream/master
     - [Glossary](/reference/tidb-binlog/glossary.md)
     + Troubleshoot
       - [Troubleshooting](/reference/tidb-binlog/troubleshoot/binlog.md)
       - [Error Handling](/reference/tidb-binlog/troubleshoot/error-handling.md)
     - [FAQ](/reference/tidb-binlog/faq.md)
   + Tools
+<<<<<<< HEAD
+=======
+    - [Tools User Guide](/reference/tools/user-guide.md)
+>>>>>>> upstream/master
     - [Mydumper](/reference/tools/mydumper.md)
     - [Syncer](/reference/tools/syncer.md)
     - [Loader](/reference/tools/loader.md)
@@ -322,7 +340,11 @@
         - [DM Overview](/reference/tools/data-migration/overview.md)
         - [Restrictions](/reference/tools/data-migration/overview.md#usage-restrictions)
         - [DM-worker](/reference/tools/data-migration/dm-worker-intro.md)
+<<<<<<< HEAD
         - [DM Relay Log](/reference/tools/data-migration/dm-worker-intro.md)
+=======
+        - [DM Relay Log](/reference/tools/data-migration/relay-log.md)
+>>>>>>> upstream/master
       + Features
         - [Table Routing](/reference/tools/data-migration/features/overview.md#table-routing)
         - [Black and White Lists](/reference/tools/data-migration/features/overview.md#black-and-white-table-lists)
@@ -352,7 +374,11 @@
         - [Skip or Replace Abnormal SQL Statements](/reference/tools/data-migration/skip-replace-sqls.md)
       - [Monitor](/reference/tools/data-migration/monitor.md)
       + Migrate from MySQL compatible database
+<<<<<<< HEAD
         - [Migrate from Aurora](/how-to/migrate/from-aurora.md)
+=======
+        - [Migrate from Amazon Aurora](/how-to/migrate/from-mysql-aurora.md)
+>>>>>>> upstream/master
       + Troubleshoot
         - [DM Troubleshooting](/reference/tools/data-migration/troubleshoot/dm.md)
         - [Error Description](/reference/tools/data-migration/troubleshoot/error-system.md)
@@ -362,6 +388,10 @@
         + v1.0
           - [1.0.2](/reference/tools/data-migration/releases/1.0.2.md)
           - [1.0.3](/reference/tools/data-migration/releases/1.0.3.md)
+<<<<<<< HEAD
+=======
+          - [1.0.4](/reference/tools/data-migration/releases/1.0.4.md)
+>>>>>>> upstream/master
       - [TiDB DM Glossary](/reference/tools/data-migration/glossary.md)
     + TiDB Lightning
       - [Overview](/reference/tools/tidb-lightning/overview.md)
@@ -437,6 +467,10 @@
 - [Roadmap](/roadmap.md)
 + [Releases](/releases/rn.md)
   + v4.0
+<<<<<<< HEAD
+=======
+    - [4.0.0-beta.2](/releases/4.0.0-beta.2.md)
+>>>>>>> upstream/master
     - [4.0.0-beta.1](/releases/4.0.0-beta.1.md)
     - [4.0.0-beta](/releases/4.0.0-beta.md)
   + v3.1
@@ -444,6 +478,10 @@
     - [3.1.0-beta.1](/releases/3.1.0-beta.1.md)
     - [3.1.0-beta](/releases/3.1.0-beta.md)
   + v3.0
+<<<<<<< HEAD
+=======
+    - [3.0.12](/releases/3.0.12.md)
+>>>>>>> upstream/master
     - [3.0.11](/releases/3.0.11.md)
     - [3.0.10](/releases/3.0.10.md)
     - [3.0.9](/releases/3.0.9.md)

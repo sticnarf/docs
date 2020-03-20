@@ -7,7 +7,11 @@ aliases: ['/docs/dev/how-to/maintain/backup-and-restore/br/']
 
 # Use BR to Back up and Restore Data
 
+<<<<<<< HEAD:reference/tools/br/br.md
 Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/how-to/maintain/backup-and-restore/mydumper-loader.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
+=======
+Backup & Restore (BR) is a command-line tool for distributed backup and restoration of the TiDB cluster data. Compared with [`mydumper`/`loader`](/how-to/maintain/backup-and-restore/mydumper-lightning.md), BR is more suitable for scenarios of huge data volume. This document describes the BR command line, detailed use examples, best practices, restrictions, and introduces the implementation principles of BR.
+>>>>>>> upstream/master:v3.1/how-to/maintain/backup-and-restore/br.md
 
 ## Usage restrictions
 
@@ -154,7 +158,11 @@ Each of the above three sub-commands might still include the following three sub
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
 
+<<<<<<< HEAD:reference/tools/br/br.md
 If the backup time might exceed the [`tikv_gc_life_time`](/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default, increase the value of this configuration.
+=======
+If the backup time might exceed the [`tikv_gc_life_time`](/reference/garbage-collection/configuration.md#tikv_gc_life_time) configuration which is `10m0s` by default (`10m0s` means 10 minutes), increase the value of this configuration.
+>>>>>>> upstream/master:v3.1/how-to/maintain/backup-and-restore/br.md
 
 For example, set `tikv_gc_life_time` to `720h`:
 
